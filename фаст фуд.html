@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <title>FastBite Simple</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #fff8e1;
+      margin: 0;
+    }
+    header {
+      background: linear-gradient(45deg, orange, red);
+      color: #fff;
+      padding: 20px;
+      text-align: center;
+    }
+    header h1 {
+      margin: 0 0 10px 0;
+    }
+    nav a {
+      color: #fff;
+      margin: 0 10px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .cart-btn {
+      background: yellow;
+      border: none;
+      padding: 10px 20px;
+      cursor: pointer;
+      border-radius: 5px;
+      font-weight: bold;
+    }
+    .categories {
+      text-align: center;
+      margin: 20px 0;
+    }
+    .categories button {
+      background: #ffb84d;
+      border: none;
+      margin: 5px;
+      padding: 10px 15px;
+      cursor: pointer;
+      border-radius: 5px;
+      font-weight: bold;
+    }
+    .menu {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .item {
+      background: #fff;
+      border: 2px solid orange;
+      border-radius: 10px;
+      width: 220px;
+      margin: 10px;
+      text-align: center;
+      padding: 15px;
+    }
+    .item img {
+      width: 100%;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+    .item h4 {
+      margin: 10px 0 5px 0;
+    }
+    .item p {
+      margin: 5px 0;
+    }
+    .item button {
+      background: purple;
+      color: #fff;
+      border: none;
+      padding: 8px 15px;
+      cursor: pointer;
+      border-radius: 5px;
+      margin-top: 10px;
+    }
+    footer {
+      background: linear-gradient(45deg, orange, red);
+      color: #fff;
+      text-align: center;
+      padding: 30px 20px;
+      margin-top: 30px;
+    }
+    footer iframe {
+      width: 90%;
+      height: 300px;
+      border: none;
+      border-radius: 10px;
+      margin: 20px 0;
+    }
+    .modal {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.7);
+      display: none;
+      justify-content: center;
+      align-items: center;
+    }
+    .modal-content {
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      width: 350px;
+      max-height: 90%;
+      overflow-y: auto;
+    }
+    .close {
+      float: right;
+      cursor: pointer;
+    }
+    .quantity {
+      display: flex;
+      justify-content: space-between;
+      margin: 5px 0;
+    }
+    .order-now-btn {
+      background: #ff6600;
+      color: #fff;
+      border: none;
+      padding: 15px 30px;
+      font-size: 18px;
+      border-radius: 30px;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+	.menu-section {
+    padding: 40px 20px;
+    background: #fff8e1;
+  }
+  .menu-section h2 {
+    text-align: center;
+    color: #d35400;
+  }
+  .categories {
+    text-align: center;
+    margin-bottom: 30px;
+  }
+  .categories button {
+    background: linear-gradient(45deg, orange, red);
+    border: none;
+    color: #fff;
+    padding: 10px 20px;
+    margin: 5px;
+    cursor: pointer;
+    border-radius: 30px;
+    font-weight: bold;
+    transition: transform 0.2s;
+  }
+  .categories button:hover {
+    transform: scale(1.05);
+  }
+  .menu-items {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+  }
+  .item {
+    background: #fff;
+    border: 2px solid orange;
+    border-radius: 10px;
+    width: 220px;
+    text-align: center;
+    padding: 15px;
+    box-shadow: 0 4px 8px rgba(255, 102, 0, 0.2);
+    transition: transform 0.2s;
+  }
+  .item:hover {
+    transform: translateY(-5px);
+  }
+  .item img {
+    width: 100%;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 8px;
+  }
+  .item h4 {
+    margin: 10px 0 5px;
+    color: #e67e22;
+  }
+  .item p {
+    margin: 5px 0;
+    font-size: 14px;
+    color: #333;
+  }
+  .item strong {
+    color: #c0392b;
+  }
+  .item button {
+    background: purple;
+    color: #fff;
+    border: none;
+    padding: 8px 15px;
+    cursor: pointer;
+    border-radius: 20px;
+    margin-top: 10px;
+    transition: background 0.2s;
+  }
+  .item button:hover {
+    background: darkmagenta;
+  }
+  
+ 
+
+.checkout-modal {
+  background-color: rgba(0, 0, 0, 0.5);
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  padding: 200px;  
+  box-sizing: border-box;
+}
+
+.checkout-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  width: 100%;
+  max-width: 400px;
+}
+
+   
+	.hero-section {
+      position: relative;
+      height: 600px;
+      overflow: hidden;
+    }
+
+    .hero-section video {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 0;
+    }
+
+    
+  </style>
+</head>
+<body>
+
+<header>
+   <h1>FastBite 🍔</h1>
+  <nav>
+    <a href="#">Меню</a>
+    <a href="#">Локация</a>
+    <a href="#">Контакты</a>
+  </nav>
+  <button class="cart-btn" onclick="openCart()">Корзина (<span id="cart-count">0</span>)</button>
+</header>
+
+
+	
+  <!-- Видео и надпись -->
+  <section class="hero-section">
+    <video autoplay muted loop>
+      <source src="меню бургеров1.mp4" type="video/mp4" />
+    </video>
+   
+	
+  </section>
+
+<section class="menu-section">
+  <h2>Наше Меню</h2>
+  <div class="categories">
+    <button>Все</button>
+    <button>Бургеры</button>
+    <button>Пицца</button>
+    <button>Напитки</button>
+  </div>
+  <div class="menu-items">
+    <div class="item" data-category="Бургеры">
+      <img src="Бургер.jpeg" alt="Классический бургер">
+      <h4>Классический бургер</h4>
+      <p>Сочный бургер с котлетой и свежими овощами.</p>
+      <p><strong>299₽</strong></p>
+      <button class="add-btn" data-name="Классический бургер" data-price="299">Добавить</button>
+    </div>
+    <div class="item" data-category="Бургеры">
+      <img src="Чизбургер.jpeg" alt="Чизбургер Делюкс">
+      <h4>Чизбургер Делюкс</h4>
+      <p>Двойная котлета, сыр чеддер, бекон и соус.</p>
+      <p><strong>399₽</strong></p>
+      <button class="add-btn" data-name="Чизбургер Делюкс" data-price="399">Добавить</button>
+    </div>
+    <div class="item" data-category="Пицца">
+      <img src="пицца.jpeg" alt="Пепперони Пицца">
+      <h4>Пепперони Пицца</h4>
+      <p>Пицца с пепперони, сыром моцарелла и томатным соусом.</p>
+      <p><strong>499₽</strong></p>
+      <button class="add-btn" data-name="Пепперони Пицца" data-price="499">Добавить</button>
+    </div>
+    <div class="item" data-category="Пицца">
+      <img src="Пицца1.jpeg" alt="Сырная Пицца">
+      <h4>Сырная Пицца</h4>
+      <p>Пицца с четырьмя сырами и хрустящей корочкой.</p>
+      <p><strong>459₽</strong></p>
+      <button class="add-btn" data-name="Сырная Пицца" data-price="459">Добавить</button>
+    </div>
+    <div class="item" data-category="Напитки">
+      <img src="Кола.jpeg" alt="Кола">
+      <h4>Кола</h4>
+      <p>Прохладная классическая кола 0.5л.</p>
+      <p><strong>99₽</strong></p>
+      <button class="add-btn" data-name="Кола" data-price="99">Добавить</button>
+    </div>
+    <div class="item" data-category="Напитки">
+      <img src="Сок.jpeg" alt="Апельсиновый сок">
+      <h4>Апельсиновый сок</h4>
+      <p>Свежевыжатый апельсиновый сок 0.3л.</p>
+      <p><strong>129₽</strong></p>
+      <button class="add-btn" data-name="Апельсиновый сок" data-price="129">Добавить</button>
+    </div>
+  </div>
+</section>
+<!-- Корзина -->
+<div class="modal" id="cart-modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeCart()">&times;</span>
+    <h3>Корзина</h3>
+    <div id="cart-items"></div>
+    <p>Итого: <span id="cart-total">0</span>₽</p>
+    <button onclick="clearCart()" style="background:red;">Очистить корзину</button>
+    <button onclick="openCheckout()" style="background: purple;">Оформить заказ</button>
+  </div>
+</div>
+
+<!-- Оформление заказа -->
+<div class="modal" id="checkout-modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeCheckout()">&times;</span>
+    <h3>Оформление заказа</h3>
+    <form onsubmit="submitOrder(event)"></br>
+      <input type="text" id="name" placeholder="Ваше имя" required></br>
+      <input type="text" id="phone" placeholder="Телефон" required></br>
+      <textarea id="address" placeholder="Адрес доставки" required></textarea></br>
+      <select id="payment">
+        <option>Наличными курьеру</option>
+        <option>Картой курьеру</option>
+      </select>
+      <button type="submit" style="background: green;">Подтвердить заказ</button>
+    </form>
+  </div>
+</div>
+
+<footer>
+  <h3>Наши Локации</h3>
+  <iframe src="https://www.google.com/maps/embed?pb=!1m18..." loading="lazy"></iframe>
+  <h3>Контакты</h3>
+  <p>📞 +7 (999) 123-45-67</p>
+  <p>📍 г. Жала-Абад, проспект Байзакова</p>
+  <button class="order-now-btn" onclick="openCheckout()">Заказать сейчас</button>
+  <p>© 2025 FastBite</p>
+</footer>
+
+<script>
+  // Находим все кнопки категорий
+  const categoryButtons = document.querySelectorAll('.categories button');
+  // Находим все карточки товаров
+  const items = document.querySelectorAll('.item');
+
+  // Для каждой кнопки навешиваем обработчик
+  categoryButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      const category = button.textContent.trim(); // название категории с кнопки
+
+      items.forEach(item => {
+        const itemCategory = item.getAttribute('data-category');
+
+        if (category === 'Все' || itemCategory === category) {
+          item.style.display = 'block';
+        } else {
+          item.style.display = 'none';
+        }
+      });
+    });
+  });
+</script>
+
+<script>
+  let cart = JSON.parse(localStorage.getItem('cart')) || [];
+  updateCartCount();
+
+  document.querySelectorAll('.add-btn').forEach(button => {
+    button.addEventListener('click', () => {
+      const name = button.dataset.name;
+      const price = parseInt(button.dataset.price);
+      addToCart(name, price);
+    });
+  });
+
+  function addToCart(name, price) {
+    const item = cart.find(i => i.name === name);
+    if (item) {
+      item.qty++;
+    } else {
+      cart.push({ name, price, qty: 1 });
+    }
+    saveCart();
+  }
+
+  function removeFromCart(index) {
+    cart.splice(index, 1);
+    saveCart();
+    openCart();
+  }
+
+  function saveCart() {
+    localStorage.setItem('cart', JSON.stringify(cart));
+    updateCartCount();
+  }
+
+  function updateCartCount() {
+    document.getElementById('cart-count').textContent = cart.reduce((t, i) => t + i.qty, 0);
+  }
+
+  function openCart() {
+    const list = document.getElementById('cart-items');
+    list.innerHTML = '';
+    cart.forEach((item, i) => {
+      const div = document.createElement('div');
+      div.innerHTML = `${item.name} — ${item.price}₽ x ${item.qty} <button onclick="removeFromCart(${i})">Удалить</button>`;
+      list.appendChild(div);
+    });
+    document.getElementById('cart-total').textContent = cart.reduce((s, i) => s + i.price * i.qty, 0);
+    document.getElementById('cart-modal').style.display = 'flex';
+  }
+
+  function closeCart() {
+    document.getElementById('cart-modal').style.display = 'none';
+  }
+
+  function clearCart() {
+    cart = [];
+    saveCart();
+    closeCart();
+  }
+
+  function openCheckout() {
+    document.getElementById('checkout-modal').style.display = 'flex';
+  }
+
+  function closeCheckout() {
+    document.getElementById('checkout-modal').style.display = 'none';
+  }
+
+  function submitOrder(e) {
+    e.preventDefault();
+    alert('Заказ оформлен! Мы свяжемся с вами.');
+    cart = [];
+    saveCart();
+    closeCheckout();
+  }
+  const TELEGRAM_BOT_TOKEN = 'ТОКЕН_БОТА';
+const TELEGRAM_CHAT_ID = 'ВАШ_CHAT_ID';
+
+</script>
+
+</body>
+</html>
