@@ -17,12 +17,16 @@
   <button class="cart-btn" onclick="openCart()">Корзина (<span id="cart-count">0</span>)</button>
 </header>
 
-<!-- Видео и надпись -->
-<section class="hero-section">
-  <video autoplay muted loop>
-    <source src="меню бургеров1.mp4" type="video/mp4" />
-  </video>
-</section>
+
+	
+  <!-- Видео и надпись -->
+  <section class="hero-section">
+    <video autoplay muted loop>
+      <source src="меню бургеров1.mp4" type="video/mp4" />
+    </video>
+   
+	
+  </section>
 
 <section class="menu-section">
   <h2>Наше Меню</h2>
@@ -34,42 +38,42 @@
   </div>
   <div class="menu-items">
     <div class="item" data-category="Бургеры">
-      <img src="Бургер.jpeg" alt="Классический бургер" />
+      <img src="Бургер.jpeg" alt="Классический бургер">
       <h4>Классический бургер</h4>
       <p>Сочный бургер с котлетой и свежими овощами.</p>
       <p><strong>299₽</strong></p>
       <button class="add-btn" data-name="Классический бургер" data-price="299">Добавить</button>
     </div>
     <div class="item" data-category="Бургеры">
-      <img src="Чизбургер.jpeg" alt="Чизбургер Делюкс" />
+      <img src="Чизбургер.jpeg" alt="Чизбургер Делюкс">
       <h4>Чизбургер Делюкс</h4>
       <p>Двойная котлета, сыр чеддер, бекон и соус.</p>
       <p><strong>399₽</strong></p>
       <button class="add-btn" data-name="Чизбургер Делюкс" data-price="399">Добавить</button>
     </div>
     <div class="item" data-category="Пицца">
-      <img src="пицца.jpeg" alt="Пепперони Пицца" />
+      <img src="пицца.jpeg" alt="Пепперони Пицца">
       <h4>Пепперони Пицца</h4>
       <p>Пицца с пепперони, сыром моцарелла и томатным соусом.</p>
       <p><strong>499₽</strong></p>
       <button class="add-btn" data-name="Пепперони Пицца" data-price="499">Добавить</button>
     </div>
     <div class="item" data-category="Пицца">
-      <img src="Пицца1.jpeg" alt="Сырная Пицца" />
+      <img src="Пицца1.jpeg" alt="Сырная Пицца">
       <h4>Сырная Пицца</h4>
       <p>Пицца с четырьмя сырами и хрустящей корочкой.</p>
       <p><strong>459₽</strong></p>
       <button class="add-btn" data-name="Сырная Пицца" data-price="459">Добавить</button>
     </div>
     <div class="item" data-category="Напитки">
-      <img src="Кола.jpeg" alt="Кола" />
+      <img src="Кола.jpeg" alt="Кола">
       <h4>Кола</h4>
       <p>Прохладная классическая кола 0.5л.</p>
       <p><strong>99₽</strong></p>
       <button class="add-btn" data-name="Кола" data-price="99">Добавить</button>
     </div>
     <div class="item" data-category="Напитки">
-      <img src="Сок.jpeg" alt="Апельсиновый сок" />
+      <img src="Сок.jpeg" alt="Апельсиновый сок">
       <h4>Апельсиновый сок</h4>
       <p>Свежевыжатый апельсиновый сок 0.3л.</p>
       <p><strong>129₽</strong></p>
@@ -77,7 +81,6 @@
     </div>
   </div>
 </section>
-
 <!-- Корзина -->
 <div class="modal" id="cart-modal">
   <div class="modal-content">
@@ -95,10 +98,10 @@
   <div class="modal-content">
     <span class="close" onclick="closeCheckout()">&times;</span>
     <h3>Оформление заказа</h3>
-    <form onsubmit="submitOrder(event)">
-      <input type="text" id="name" placeholder="Ваше имя" required /><br />
-      <input type="text" id="phone" placeholder="Телефон" required /><br />
-      <textarea id="address" placeholder="Адрес доставки" required></textarea><br />
+    <form onsubmit="submitOrder(event)"></br>
+      <input type="text" id="name" placeholder="Ваше имя" required></br>
+      <input type="text" id="phone" placeholder="Телефон" required></br>
+      <textarea id="address" placeholder="Адрес доставки" required></textarea></br>
       <select id="payment">
         <option>Наличными курьеру</option>
         <option>Картой курьеру</option>
@@ -119,15 +122,19 @@
 </footer>
 
 <script>
-  // Категории и фильтрация меню
+  // Находим все кнопки категорий
   const categoryButtons = document.querySelectorAll('.categories button');
+  // Находим все карточки товаров
   const items = document.querySelectorAll('.item');
 
+  // Для каждой кнопки навешиваем обработчик
   categoryButtons.forEach(button => {
     button.addEventListener('click', () => {
-      const category = button.textContent.trim();
+      const category = button.textContent.trim(); // название категории с кнопки
+
       items.forEach(item => {
         const itemCategory = item.getAttribute('data-category');
+
         if (category === 'Все' || itemCategory === category) {
           item.style.display = 'block';
         } else {
@@ -212,7 +219,9 @@
     saveCart();
     closeCheckout();
   }
-</script>
+  const TELEGRAM_BOT_TOKEN = 'ТОКЕН_БОТА';
+const TELEGRAM_CHAT_ID = 'ВАШ_CHAT_ID';
 
-</body>
+</script>
+  </body>
 </html>
